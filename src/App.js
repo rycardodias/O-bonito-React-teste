@@ -5,42 +5,47 @@ import { Switch, Route } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
 // import Footer from './components/Footer'
-import Login from './components/Login'
 
-import Home from './pages/Home'
+
+import Body from './pages/Body'
 
 
 class App extends Component {
   state = {
     isLoggedIn: false,
-    navComponent: 'home'
+    navComponent: 'Home'
   }
 
-  onChangeLoginInHandler = (e) => {
-    this.setState({ isLoggedIn: e })
-  }
-
-  onChangeNavBarHandler = (e) => {
-    this.setState({ navComponent: e})
-    // altera o estado do loggin quando usa botao de sair
-    if (e === 'logout') { 
-      this.setState({ isLoggedIn: false })
+  _onChangeNavBarHandler = (e) => {
+    this.setState({ navComponent: e })
+    // altera o estado do login quando usa botao de sair
+    if (e === 'Logout') {
+      this.setState({
+        isLoggedIn: false,
+        navComponent: 'Home'
+      })
     }
   }
 
-  render() {    
+  _onChangeLoginInHandler = (login, component) => {
+    this.setState({
+      isLoggedIn: login,
+      navComponent: component
+    })
+  }
+
+  render() {
     return (
       <div className='app'>
-        <Navbar onClickResult={this.onChangeNavBarHandler} loginStatus={this.state.isLoggedIn}/>
+        <Navbar navbarHandler={this._onChangeNavBarHandler} loginResult={this.state.isLoggedIn} navComp={this.state.navComponent} />
         <Switch>
           <Route exact path='/'>
-            {this.state.navComponent === 'home' ? <Home onLoginResult={this.onChangeLoginInHandler} /> : null}
-            {this.state.navComponent === 'login' ? <Login onLoginResult={this.onChangeLoginInHandler} /> : null}
+            <Body
+              navComponentResult={this.state.navComponent}
+              loginResult={this.state.isLoggedIn}
+              loginInHandler={this._onChangeLoginInHandler} />
           </Route>
-          {/*<Route path='/detail/:movieId' component={Detail} />
-          <Route component={NotFound} /> */}
         </Switch>
-        {/* <Footer /> */}
       </div>
     );
   }
