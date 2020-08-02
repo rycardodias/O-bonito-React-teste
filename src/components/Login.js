@@ -17,8 +17,9 @@ export default class Login extends Component {
     _handleSubmit = () => {
         const emailTemp = 'rycardo.dias@hotmail.com'
         const passwordTemp = '1'
+        const nome = 'Ricardo Dias'
         if (this.state.email === emailTemp && this.state.password === passwordTemp) {
-            this.props.loginHandler(true, 'Cozinha')
+            this.props.loginHandler(true, 'Cozinha', nome)
         }
     }
 

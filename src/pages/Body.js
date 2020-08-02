@@ -6,8 +6,8 @@ import Cozinha from '../components/Cozinha'
 
 export default class Body extends Component {
 
-    onChangeLoginInHandler = (login, component) => {
-        this.props.loginInHandler(login, component)
+    onChangeLoginInHandler = (login, component, user) => {
+        this.props.loginInHandler(login, component, user)
     }
 
     render() {

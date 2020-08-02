@@ -13,7 +13,8 @@ import Body from './pages/Body'
 class App extends Component {
   state = {
     isLoggedIn: false,
-    navComponent: 'Home'
+    navComponent: 'Home',
+    user: ''
   }
 
   _onChangeNavBarHandler = (e) => {
@@ -22,22 +23,24 @@ class App extends Component {
     if (e === 'Logout') {
       this.setState({
         isLoggedIn: false,
-        navComponent: 'Home'
+        navComponent: 'Home',
+        user: ''
       })
     }
   }
 
-  _onChangeLoginInHandler = (login, component) => {
+  _onChangeLoginInHandler = (login, component, user) => {
     this.setState({
       isLoggedIn: login,
-      navComponent: component
+      navComponent: component,
+      user: user
     })
   }
 
   render() {
     return (
       <div className='app'>
-        <Navbar navbarHandler={this._onChangeNavBarHandler} loginResult={this.state.isLoggedIn} navComp={this.state.navComponent} />
+        <Navbar navbarHandler={this._onChangeNavBarHandler} loginResult={this.state.isLoggedIn} userResult={this.state.user} />
         <Switch>
           <Route exact path='/'>
             <Body

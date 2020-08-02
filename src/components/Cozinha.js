@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
+import DetalheCozinha from './DetalheCozinha'
 
 export default class Cozinha extends Component {
     state = {
         buttonIndex: null
+    }
+
+    _onButtonIndexHandler = (e) => {
+        this.setState({
+            buttonIndex: e
+        })
     }
 
     _handleClick = (e) => {
@@ -24,10 +31,16 @@ export default class Cozinha extends Component {
                 </div>
         )
 
+        if (this.state.buttonIndex === null) {
+            return (
+                <div class="columns is-multiline is-mobile">
+                    {itens}
+                </div>
+            )
+        }
+
         return (
-            <div class="columns is-multiline is-mobile">
-                
-            </div>
+            <DetalheCozinha buttonIndexResult={this.state.buttonIndex} buttonIndexHandler={this._onButtonIndexHandler} />
         )
     }
 }

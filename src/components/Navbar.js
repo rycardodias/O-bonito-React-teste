@@ -10,7 +10,6 @@ const NavbarBurger = props => (
 
 export default class Navbar extends Component {
     state = {
-        navComponent: '',
         activeMenu: false,
     }
 
@@ -47,6 +46,7 @@ export default class Navbar extends Component {
                     {this.props.loginResult
                         ?
                         < div class="navbar-end">
+                            <a class="navbar-item">{this.props.userResult}</a>
                             <a class="navbar-item" onClick={this._handleClick} name='Logout'>Sair</a>
                         </div>
                         : <>
